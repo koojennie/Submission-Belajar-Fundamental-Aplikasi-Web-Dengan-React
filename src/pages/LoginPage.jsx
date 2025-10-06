@@ -19,8 +19,8 @@ export default function LoginPage({ onLoginSuccess }) {
     setLoading(false);
     if (!error) {
       putAccessToken(data.accessToken);
-      const { data: user } = await getUserLogged(); // ambil user setelah login
-      onLoginSuccess?.(user);  // kirim ke App
+      const { data: user } = await getUserLogged(); 
+      onLoginSuccess?.(user); 
       navigate('/', { replace: true });
     }
   }

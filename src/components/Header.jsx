@@ -13,7 +13,6 @@ export default function Header({ authedUser, onLogout }) {
   return (
     <header>
       <h1><Link to="/">{locale === 'id' ? 'Aplikasi Catatan' : 'Notes App'}</Link></h1>
-
       <nav className="navigation">
         <ul>
           {authedUser && (

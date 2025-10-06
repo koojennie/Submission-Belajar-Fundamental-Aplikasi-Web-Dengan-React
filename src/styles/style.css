@@ -1,9 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Source+Code+Pro:ital,wght@0,200..900;1,200..900&display=swap');
 
-/* ==============================
-   COLOR VARIABLES (YOUR THEME)
-   ============================== */
 :root {
   --primary: #BB86FC;
   --primary-variant: #3700B3;
@@ -29,9 +26,6 @@
   --title: #efeaff;
 }
 
-/* ==============================
-   BASE ELEMENTS
-   ============================== */
 * {
   box-sizing: border-box;
   margin: 0;
@@ -43,6 +37,7 @@ a {
   text-decoration: none;
   transition: 0.2s ease-in;
 }
+
 a:hover {
   color: var(--title);
 }
@@ -58,9 +53,6 @@ body {
   transition: all ease-in-out 0.5s;
 }
 
-/* ==============================
-   HEADER & NAVIGATION
-   ============================== */
 header {
   display: flex;
   align-items: center;
@@ -68,19 +60,18 @@ header {
   padding: 16px;
   border-bottom: 2px solid #f4f4f4;
 }
+
 header h1 {
   flex: 1;
   font-size: 24px;
 }
+
 header .navigation ul li {
   display: inline-block;
   font-size: 24px;
   margin: 0 8px;
 }
 
-/* ==============================
-   MAIN CONTAINER
-   ============================== */
 main {
   margin: 0 auto;
   padding: 32px 0;
@@ -88,9 +79,6 @@ main {
   max-width: 1200px;
 }
 
-/* ==============================
-   NOTE LIST
-   ============================== */
 .notes-list {
   margin-top: 32px;
   display: grid;
@@ -98,6 +86,7 @@ main {
   gap: 16px;
   padding: 16px 8px;
 }
+
 .notes-list-empty {
   display: flex;
   flex-direction: column;
@@ -107,19 +96,18 @@ main {
   padding: 16px 8px;
   font-family: "Poppins";
 }
+
 .notes-list-empty p {
   text-align: center;
   color: var(--on-background-grey);
 }
+
 .notes-list-empty-image {
   margin-top: 5px;
   margin-bottom: 20px;
   width: 35%;
 }
 
-/* ==============================
-   NOTE ITEM
-   ============================== */
 .note-item {
   padding: 16px;
   border-radius: 8px;
@@ -128,18 +116,22 @@ main {
   font-family: 'Poppins';
   transition: transform 0.2s ease-in, box-shadow 0.2s ease-in, background 0.2s ease-in;
 }
+
 .note-item:hover {
   transform: translate(-4px, -4px);
   box-shadow: 2px 2px 0px var(--content);
 }
+
 .note-item__title {
   margin: 4px 0;
 }
+
 .note-item__createdAt {
   color: var(--on-background-grey);
   font-size: 14px;
   margin: 4px 0;
 }
+
 .note-item__body {
   margin-top: 16px;
   overflow: hidden;
@@ -149,32 +141,29 @@ main {
   -webkit-box-orient: vertical;
 }
 
-/* ==============================
-   DETAIL PAGE
-   ============================== */
 .detail-page {
   margin: 0 auto;
   margin-top: 32px;
   width: 90%;
   font-family: 'Poppins';
 }
+
 .detail-page__title {
   font-size: 48px;
   margin-bottom: 8px;
   word-wrap: break-word;
 }
+
 .detail-page__createdAt {
   color: var(--on-background-grey);
 }
+
 .detail-page__body {
   line-height: 1.5;
   margin-top: 36px;
   font-size: 18px;
 }
 
-/* ==============================
-   ACTION BUTTONS
-   ============================== */
 .detail-page__action,
 .homepage__action,
 .add-new-page__action {
@@ -184,6 +173,7 @@ main {
   bottom: 32px;
   right: 32px;
 }
+
 .action {
   display: flex;
   align-items: center;
@@ -199,17 +189,16 @@ main {
   cursor: pointer;
   transition: 0.2s ease-in;
 }
+
 .action:hover {
   background-color: var(--on-surface);
   color: var(--title);
 }
 
-/* ==============================
-   FORM INPUT (ADD PAGE)
-   ============================== */
 .add-new-page__input {
   margin-top: 32px;
 }
+
 .add-new-page__input .add-new-page__input__title {
   width: 100%;
   background-color: transparent;
@@ -220,9 +209,11 @@ main {
   font-weight: bold;
   padding: 8px 0;
 }
+
 .add-new-page__input__title::placeholder {
   color: var(--on-background-grey);
 }
+
 .add-new-page__input .add-new-page__input__body {
   width: 100%;
   background-color: transparent;
@@ -233,19 +224,18 @@ main {
   padding: 8px 0;
   min-height: 500px;
 }
+
 [data-placeholder]:empty::before {
   content: attr(data-placeholder);
   color: var(--on-background-grey);
 }
 
-/* ==============================
-   SEARCH BAR
-   ============================== */
 .search-bar {
   position: relative;
   display: flex;
   align-items: center;
 }
+
 .search-bar svg {
   position: absolute;
   left: 14px;
@@ -255,6 +245,7 @@ main {
   font-size: 16px;
   pointer-events: none;
 }
+
 .search-bar input {
   margin: 16px 0;
   font-family: 'Poppins', sans-serif;
@@ -266,25 +257,25 @@ main {
   color: var(--on-background);
   transition: box-shadow 0.2s ease-in, background 0.2s ease-in;
 }
+
 [data-theme="dark"] .search-bar input:focus {
   outline: none;
   background: #efeaff;
   border-color: black;
   box-shadow: 2px 2px 0px black;
 }
+
 [data-theme="light"] .search-bar input:focus {
   outline: none;
   background: #333333;
   border-color: #D9D9D9;
   box-shadow: 2px 2px 0px #D9D9D9;
 }
+
 .search-bar input::placeholder {
   color: var(--on-background-grey);
 }
 
-/* ==============================
-   TOGGLE THEME & LOCALE
-   ============================== */
 .toggle-theme,
 .toggle-locale {
   background-color: transparent;
@@ -295,25 +286,26 @@ main {
   align-items: center;
   margin: 0 16px;
 }
+
 .toggle-theme {
   font-size: 36px;
 }
+
 .toggle-locale {
   font-size: 28px;
 }
 
-/* ==============================
-   AUTH FORMS (LOGIN/REGISTER)
-   ============================== */
 .input-login,
 .input-register {
   margin: 32px 0;
 }
+
 .input-login label,
 .input-register label {
   font-size: 24px;
   font-weight: lighter;
 }
+
 .input-login input,
 .input-register input {
   font-size: 18px;
@@ -328,6 +320,7 @@ main {
   border: 3px solid var(--on-background);
   color: var(--on-background);
 }
+
 .input-login button,
 .input-register button {
   font-family: 'Poppins', sans-serif;
@@ -342,15 +335,13 @@ main {
   cursor: pointer;
   transition: 0.2s ease-in;
 }
+
 .input-login button:hover,
 .input-register button:hover {
   background-color: var(--title);
   color: var(--on-surface);
 }
 
-/* ==============================
-   LOGOUT BUTTON
-   ============================== */
 .button-logout {
   display: flex;
   align-items: center;
@@ -384,11 +375,13 @@ main {
     font-size: 64px;
   }
 }
+
 @media screen and (min-width: 850px) {
   .notes-list {
     grid-template-columns: repeat(3, 1fr);
   }
 }
+
 @media screen and (min-width: 1200px) {
   .notes-list {
     grid-template-columns: repeat(4, 1fr);
