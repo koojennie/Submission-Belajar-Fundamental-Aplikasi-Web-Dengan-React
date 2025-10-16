@@ -3,28 +3,32 @@ pipeline {
 
     environment {
         ORTELIUS_URL = "http://18.234.48.8"
-        ORTELIUS_USER = "admin"       // ganti user ortelius kamu
-        ORTELIUS_PASS = "admin"    // ganti password ortelius kamu
+        ORTELIUS_USER = "admin"
+        ORTELIUS_PASS = "admin"
     }
 
     stages {
         stage('Checkout') {
             steps {
-                git branch: 'main', credentialsId: 'github-creds', url: 'https://github.com/koojennie/Submission-Belajar-Fundamental-Aplikasi-Web-Dengan-React.git'
+                git branch: 'main',
+                    credentialsId: 'github-creds',
+                    url: 'https://github.com/koojennie/Submission-Belajar-Fundamental-Aplikasi-Web-Dengan-React.git'
             }
         }
 
-        stage('Build') {
+        stage('Build React App') {
             steps {
-                echo "Building application..."
-                sh 'echo Build success!'
+                sh '''
+                    npm install
+                    npm run build
+                '''
             }
         }
 
         stage('Generate SBOM') {
             steps {
                 echo "Generating SBOM..."
-                sh 'syft . -o json > sbom.json || true' // contoh pakai Syft
+                sh 'syft . -o json > sbom.json || true'
             }
         }
 
@@ -33,7 +37,7 @@ pipeline {
                 echo "Sending SBOM to Ortelius..."
                 script {
                     def payload = [
-                        name: "my-app",
+                        name: "my-react-app",
                         version: "1.0.0-${env.BUILD_NUMBER}",
                         sbom: readFile('sbom.json')
                     ]
@@ -44,6 +48,19 @@ pipeline {
                         url: "${ORTELIUS_URL}/msapi/component"
                 }
             }
+        }
+
+        stage('Deploy') {
+            steps {
+                echo "Deploying React build to Nginx..."
+                sh 'sudo cp -r build/* /var/www/html/'
+            }
+        }
+    }
+
+    post {
+        success {
+            archiveArtifacts artifacts: 'build/**', fingerprint: true
         }
     }
 }
