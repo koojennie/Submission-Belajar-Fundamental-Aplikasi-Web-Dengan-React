@@ -31,11 +31,16 @@ pipeline {
         stage('Publish to Ortelius') {
             steps {
                 echo "Sending SBOM to Ortelius..."
+                def payload = [
+                    name: "my-app",
+                    version: "1.0.0-${env.BUILD_NUMBER}",
+                    sbom: readFile('sbom.json')
+                ]
                 httpRequest authentication: 'ortelius-creds',
                     httpMode: 'POST',
                     contentType: 'APPLICATION_JSON',
-                    requestBody: readFile('sbom.json'),
-                    url: "${ORTELIUS_URL}/api/catalog/component"
+                    requestBody: groovy.json.JsonOutput.toJson(payload),
+                    url: "${ORTELIUS_URL}/msapi/component"
             }
         }
     }
