@@ -59,9 +59,10 @@ Version = "v1.0.0.${env.BUILD_NUMBER}-${env.GIT_COMMIT.take(7)}"
             steps {
                 echo "Installing Ortelius CLI..."
                 sh '''
-                curl -L https://github.com/ortelius/ortelius-cli/releases/download/v9.3.283/ortelius-linux-amd64.tar.gz -o dh
-                chmod +x dh
-                sudo mv dh /usr/local/bin/
+                curl -L https://github.com/Ortelius/ortelius-cli/releases/latest/download/ortelius-linux-amd64.tar.gz -o dh.tar.gz
+                tar -xvf dh.tar.gz
+                chmod +x ortelius
+                mv ortelius dh
                 '''
             }
         }
@@ -73,7 +74,7 @@ Version = "v1.0.0.${env.BUILD_NUMBER}-${env.GIT_COMMIT.take(7)}"
                 export DHURL=${DHURL}
                 export DHUSER=${DHUSER}
                 export DHPASS=${DHPASS}
-                dh updatecomp --rsp component.toml --deppkg "cyclonedx@cyclonedx.json"
+                ./dh updatecomp --rsp component.toml --deppkg "cyclonedx@cyclonedx.json"
                 '''
             }
         }
