@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-        ORTELIUS_URL = "http://18.234.48.8"
+        ORTELIUS_URL = "http://98.86.106.66"
         ORTELIUS_USER = "admin"
         ORTELIUS_PASS = "admin"
     }
