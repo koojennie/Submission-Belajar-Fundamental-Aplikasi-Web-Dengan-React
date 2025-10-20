@@ -12,22 +12,22 @@ pipeline {
         IMAGE_TAG = "1.0.${BUILD_NUMBER}"
     }
 
-    stage('Set Git Vars') {
-        steps {
-            script {
-                env.GIT_COMMIT = sh(script: "git rev-parse HEAD", returnStdout: true).trim()
-                env.SHORT_SHA = env.GIT_COMMIT.take(7)
-                env.GIT_BRANCH = sh(script: "git rev-parse --abbrev-ref HEAD", returnStdout: true).trim()
-                env.GIT_URL = "https://github.com/koojennie/Submission-Belajar-Fundamental-Aplikasi-Web-Dengan-React"
-                env.GIT_REPO = "Submission-Belajar-Fundamental-Aplikasi-Web-Dengan-React"
-            }
-        }
-    }
-
     stages {
         stage('Checkout') {
             steps {
                 git branch: 'main', credentialsId: 'github-creds', url: 'https://github.com/koojennie/Submission-Belajar-Fundamental-Aplikasi-Web-Dengan-React.git'
+            }
+        }
+
+        stage('Set Git Vars') {
+            steps {
+                script {
+                    env.GIT_COMMIT = sh(script: "git rev-parse HEAD", returnStdout: true).trim()
+                    env.SHORT_SHA = env.GIT_COMMIT.take(7)
+                    env.GIT_BRANCH = sh(script: "git rev-parse --abbrev-ref HEAD", returnStdout: true).trim()
+                    env.GIT_URL = "https://github.com/koojennie/Submission-Belajar-Fundamental-Aplikasi-Web-Dengan-React"
+                    env.GIT_REPO = "Submission-Belajar-Fundamental-Aplikasi-Web-Dengan-React"
+                }
             }
         }
 
@@ -43,7 +43,7 @@ pipeline {
                 echo "Generating SBOM using Syft..."
                 sh '''
                 curl -sSfL https://raw.githubusercontent.com/anchore/syft/main/install.sh | sh -s -- -b $PWD
-                ./syft dir:. -o cyclonedx-json > cyclonedx.json
+                ./syft packages dir:. -o cyclonedx-json > cyclonedx.json
                 '''
             }
         }
@@ -52,13 +52,15 @@ pipeline {
             steps {
                 writeFile file: 'component.toml', text: """
 Application = "GLOBAL.CICD.ReactApp"
-Application_Version = "1.0"
+Application_Version = "1.0.0"
 
-Name = "GLOBAL.CICD.ReactComponent"
-Variant = "${env.BRANCH_NAME}"
-Version = "v1.0.0.${env.BUILD_NUMBER}-${env.GIT_COMMIT.take(7)}"
+Name = "GLOBAL.CICD.ReactWebApp"
+Variant = "${env.GIT_BRANCH}"
+Version = "v1.0.0.${env.BUILD_NUMBER}-g${env.SHORT_SHA}"
 
 [Attributes]
+    GitRepo = "${env.GIT_URL}"
+    GitCommit = "${env.GIT_COMMIT}"
     DockerRepo = "${env.DOCKERREPO}"
     DockerTag = "${env.IMAGE_TAG}"
     ServiceOwner = "${env.DHUSER}"
