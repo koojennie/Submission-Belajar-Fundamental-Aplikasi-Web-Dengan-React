@@ -12,6 +12,18 @@ pipeline {
         IMAGE_TAG = "1.0.${BUILD_NUMBER}"
     }
 
+    stage('Set Git Vars') {
+        steps {
+            script {
+                env.GIT_COMMIT = sh(script: "git rev-parse HEAD", returnStdout: true).trim()
+                env.SHORT_SHA = env.GIT_COMMIT.take(7)
+                env.GIT_BRANCH = sh(script: "git rev-parse --abbrev-ref HEAD", returnStdout: true).trim()
+                env.GIT_URL = "https://github.com/koojennie/Submission-Belajar-Fundamental-Aplikasi-Web-Dengan-React"
+                env.GIT_REPO = "Submission-Belajar-Fundamental-Aplikasi-Web-Dengan-React"
+            }
+        }
+    }
+
     stages {
         stage('Checkout') {
             steps {
