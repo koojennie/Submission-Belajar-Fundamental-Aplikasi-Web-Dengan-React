@@ -6,6 +6,8 @@ Application_Version = "1.0.0"
 Name = "GLOBAL.CICD.ReactWebApp"
 Variant = "${GIT_BRANCH}"
 Version = "v1.0.${BUILD_NUM}-g${SHORT_SHA}"
+GitRepo = "https://github.com/koojennie/Submission-Belajar-Fundamental-Aplikasi-Web-Dengan-React"
+GitCommit = "${env.GIT_COMMIT}"
 
 [Attributes]
     ServiceOwner = "${DHUSER}"
