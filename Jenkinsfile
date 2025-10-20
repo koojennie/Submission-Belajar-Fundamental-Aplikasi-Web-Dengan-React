@@ -3,7 +3,7 @@ pipeline {
 
     environment {
         // Ortelius credentials & URLs
-        DHURL = "http://98.86.106.66/" // atau IP Ortelius kamu, kalau domain belum resolve
+        DHURL = "https://3.90.10.138/" // IP EC2 Ortelius
         DHUSER = "admin"
         DHPASS = "admin"
 
