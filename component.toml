@@ -8,5 +8,9 @@ Variant = "${GIT_BRANCH}"
 Version = "v1.0.${BUILD_NUM}-g${SHORT_SHA}"
 
 [Attributes]
+    GitRepo = "https://github.com/koojennie/Submission-Belajar-Fundamental-Aplikasi-Web-Dengan-React"
+    GitCommit = "${GIT_COMMIT}"
+    DockerRepo = "${DOCKERREPO}"
+    DockerTag = "${IMAGE_TAG}"
     ServiceOwner = "${DHUSER}"
     ServiceOwnerEmail = "you@example.com"
