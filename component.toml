@@ -5,7 +5,7 @@ Application_Version = "1.0.0"
 # Component info
 Name = "GLOBAL.CICD.ReactWebApp"
 Variant = "${GIT_BRANCH}"
-Version = "v1.0.${BUILD_NUM}-g${SHORT_SHA}"
+Version = "v1.0.${BUILD_NUMBER}-g${SHORT_SHA}"
 
 [Attributes]
     GitRepo = "https://github.com/koojennie/Submission-Belajar-Fundamental-Aplikasi-Web-Dengan-React"
