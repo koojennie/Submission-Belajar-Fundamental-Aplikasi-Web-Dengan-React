@@ -43,7 +43,7 @@ pipeline {
                 echo "Generating CycloneDX SBOM (v1.4 compatible)..."
                 sh '''
                 curl -sSfL https://raw.githubusercontent.com/anchore/syft/main/install.sh | sh -s -- -b $PWD
-                ./syft dir:. -o cyclonedx-json@1.4 > cyclonedx.json
+                ./syft dir:. --scope all-layers -o cyclonedx-json@1.4 > cyclonedx.json
                 echo "SBOM generated with CycloneDX 1.4"
                 ls -lh cyclonedx.json
                 head -20 cyclonedx.json
