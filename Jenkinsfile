@@ -40,13 +40,11 @@ pipeline {
 
         stage('Generate SBOM') {
             steps {
-                echo "Generating CycloneDX SBOM (v1.4 compatible)..."
+                echo "Generating CycloneDX SBOM (fixed Syft version 1.33.0)..."
                 sh '''
-                curl -sSfL https://raw.githubusercontent.com/anchore/syft/main/install.sh | sh -s -- -b $PWD
-                ./syft dir:. --scope all-layers -o cyclonedx-json@1.4 > cyclonedx.json
-                echo "SBOM generated with CycloneDX 1.4"
-                ls -lh cyclonedx.json
-                head -20 cyclonedx.json
+                curl -sSfL https://raw.githubusercontent.com/anchore/syft/main/install.sh | sh -s -- -b $PWD v1.33.0
+                ./syft scan dir:. -o cyclonedx-json@1.4 > cyclonedx.json
+                echo "✅ SBOM generated successfully with Syft v1.33.0 (CycloneDX 1.4)"
                 '''
             }
         }
